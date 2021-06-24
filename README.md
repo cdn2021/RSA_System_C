@@ -53,6 +53,7 @@ int main(void){
    //n = 259  
    decode_rsa(n,val->private_key); //传入n=259,private_key={269,493}  
    //此时n=259^269 mod 493 = 327  
+   free(val);
    return *n;  
      
 };  
