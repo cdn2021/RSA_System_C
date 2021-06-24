@@ -5,15 +5,13 @@ struct rsa{
   unsigned long long int private_key[2];
   unsigned long long int value;  
 };
-_Bool encode_rsa(unsigned long long int *,unsigned long long int *);
-_Bool decode_rsa(unsigned long long int *,unsigned long long int *);
-int createKey(struct rsa *);
-int checkPrime(unsigned long long int);
+void encode_rsa(unsigned long long int *,unsigned long long int *);
+void decode_rsa(unsigned long long int *,unsigned long long int *);
+void createKey(struct rsa *);
+_Bool checkPrime(unsigned long long int);
 int getGCD(unsigned long long int ,unsigned long long int );
-void swap(unsigned long long int * ,unsigned long long int *);
 
-
-_Bool encode_rsa(unsigned long long int * val,unsigned long long int * public_key) { 
+void encode_rsa(unsigned long long int * val,unsigned long long int * public_key) { 
     unsigned long long int x = 1;
     unsigned long long int i = 0;
     while (i < public_key[0]) {
@@ -22,9 +20,9 @@ _Bool encode_rsa(unsigned long long int * val,unsigned long long int * public_ke
       i++;
     };
   *val = x;
-    return true;  
+    return;
 };
-_Bool decode_rsa(unsigned long long int * val,unsigned long long int * private_key) { 
+void decode_rsa(unsigned long long int * val,unsigned long long int * private_key) { 
     unsigned long long int x = 1;
     unsigned long long int i = 0;
     while (i < private_key[0]) {
@@ -35,22 +33,22 @@ _Bool decode_rsa(unsigned long long int * val,unsigned long long int * private_k
   *val = x;
     return true;  
 };
-int checkPrime(unsigned long long int n){
+_Bool checkPrime(unsigned long long int n){
     if (n < 2)
-      return 0;
+      return false;
     if (n == 2)
-      return 1;
+      return true;
     unsigned long long int root = (unsigned long long int)sqrt(n);
   //得到n的平方根
     unsigned long long int i = 2;
   //从2开始遍历，到i为止
     while (i < root) {
      if (!(n % i))
-       return 0;
+       return false;
     //n对i取余，如果值为0,（合数），那n就不是素数
     i++;
     };
-  return 1;
+  return true;
   //n是素数
 };
 
@@ -59,13 +57,7 @@ int getGCD(unsigned long long int a,unsigned long long int b) {
     return a;
   return getGCD(b,a % b);
 };
-void swap(unsigned long long int * v,unsigned long long int * w) {
-  //交换v和w的值
-  unsigned long long int tmp = *v;
-  *v = *w;
-  *w = tmp;
-};
-int createKey(struct rsa * res){
+void createKey(struct rsa * res){
   unsigned long int p,q;
   p = (unsigned long int)time(NULL);
   while(!checkPrime(p))
@@ -92,5 +84,5 @@ int createKey(struct rsa * res){
   res->public_key[1] = n;
   res->private_key[0] = d;
   res->private_key[1] = n;
-  return 1;
+  return;
 };
