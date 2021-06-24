@@ -27,7 +27,7 @@ void decode_rsa(unsigned long long int * val,unsigned long long int * private_ke
   
     
       
-代码范例
+代码范例  
 ``
 #include "rsa.h"  
 #include <stdlib.h> // malloc,free函数原型  
