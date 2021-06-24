@@ -1,34 +1,34 @@
 ## RSA 加密系统  
 函数  
-``
+```c
 struct rsa{  
   unsigned long long int public_key[2];  
   unsigned long long int private_key[2];  
   unsigned long long int value;  
 };  
 void createKey(struct rsa *);  
-``
+```
 向createKey函数传递一个指向结构体rsa的指针，即可生成公钥和秘钥  
   
   
-``
+```c
 void encode_rsa(unsigned long long int * val,unsigned long long int * public_key);  
-``
+```
 向函数encode_rsa传递下列参数用于加密  
 1. 你要加密的值（无符号长长整数）    val  
 2. 你的公钥（无符号长长整数数组指针）  public_key  
 无返回值，会修改指针val的值  
 
-``
+```c
 void decode_rsa(unsigned long long int * val,unsigned long long int * private_key);  
-``
+```
 同理，向函数decode_rsa传递下列参数用于解密  
 第二个参数是你的密钥（无符号长长整数数组指针）private_key  
   
     
       
 代码范例  
-``
+```c
 #include "rsa.h"  
 #include <stdlib.h> // malloc,free函数原型  
 int main(void){  
@@ -56,4 +56,4 @@ int main(void){
    return *n;  
      
 };  
-``
+```
